@@ -1,27 +1,53 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import { TaskList } from 'components/TaskList/TaskList';
-import { TaskEditor } from 'components/TaskEditor/TaskEditor';
-import { fetchTasks } from 'redux/tasks/operations';
-import { selectLoading } from 'redux/tasks/selectors';
+// import { Helmet } from 'react-helmet';
+import { fetchContacts } from 'redux/operations';
+import { selectIsLoading } from 'redux/selectors';
 
-export default function Tasks() {
+import { Filter } from 'components/Filter/Filter';
+import { ContactList } from 'components/ContactList/ContactList';
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { Phonebook, ContactTitle, TitlePhonebook } from './Contacts.styled';
+
+export default function Contacts() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectLoading);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    dispatch(fetchTasks());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
-    <>
-      <Helmet>
-        <title>Your Contacts</title>
-      </Helmet>
-      <TaskEditor />
-      <div>{isLoading && 'Request in progress...'}</div>
-      <TaskList />
-    </>
+    <Phonebook>
+      <TitlePhonebook>Phonebook</TitlePhonebook>
+      <ContactForm />
+      {isLoading && (
+        //   !error &&
+        <b>Request in progress...</b>
+      )}
+      <ContactTitle>Contacts</ContactTitle>
+      <Filter />
+      <ContactList />
+    </Phonebook>
   );
 }
+
+//  return (
+//     <Phonebook>
+//       <TitlePhonebook>Phonebook</TitlePhonebook>
+//       <ContactForm />
+//       {isLoading && !error && <b>Request in progress...</b>}
+//       <ContactTitle>Contacts</ContactTitle>
+//       <Filter />
+//       <ContactList />
+//     </Phonebook>
+//   );
+//  <>
+
+//       <Helmet>
+//         <title>Your Contacts</title>
+//       </Helmet>
+//       <TaskEditor />
+//       <div>{isLoading && 'Request in progress...'}</div>
+//       <TaskList />
+//     </>

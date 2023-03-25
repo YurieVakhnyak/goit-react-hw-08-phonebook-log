@@ -3,14 +3,13 @@ import axios from 'axios';
 
 // const id = nanoid();
 
-axios.defaults.baseURL =
-  'https://6412c4dfb1ea744303189785.mockapi.io/Yurie-Vakhnyak-goit-react-hw-07-phonebook-redux-async/';
-
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
       const response = await axios.get('/contacts');
+      console.log(response.data);
+
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
