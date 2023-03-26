@@ -22,12 +22,17 @@ export const ContactList = () => {
   // const filterValue = useSelector(selectFilterValue);
   const visibleContacts = useSelector(selectVisibleContacts);
   // console.log(contacts, filterValue, visibleContacts);
+  console.log(visibleContacts);
 
   return (
     <ContacListStyled>
-      {visibleContacts.map(({ id, name, number }) => (
-        <ContactItem key={id} id={id} name={name} number={number} />
-      ))}
+      {visibleContacts ? (
+        visibleContacts.map(({ id, name, number }) => (
+          <ContactItem key={id} id={id} name={name} number={number} />
+        ))
+      ) : (
+        <p>nich ne vudno!</p>
+      )}
     </ContacListStyled>
   );
 };

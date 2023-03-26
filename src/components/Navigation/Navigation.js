@@ -6,7 +6,7 @@ export const Navigation = () => {
 
   return (
     <nav>
-      <NavLink to="/goit-react-hw-08-phonebook-log">Home</NavLink>
+      <NavLink to="/">Home</NavLink>
       {isLoggedIn && <NavLink to="/contacts">Contacts</NavLink>}
     </nav>
   );

@@ -1,7 +1,6 @@
 import {
-  getDefaultMiddleware,
   configureStore,
-  combineReducers,
+  // combineReducers,
 } from '@reduxjs/toolkit';
 import {
   persistReducer,
@@ -19,13 +18,12 @@ import { contactsReducer } from './contactsSlice';
 import { filterReducer } from './filterSlice';
 import { authReducer } from './auth/authSlice';
 
-const middleware = [
-  ...getDefaultMiddleware({
+const middleware = getDefaultMiddleware =>
+  getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }),
-];
+  });
 
 const authPersistConfig = {
   key: 'auth',
@@ -33,11 +31,23 @@ const authPersistConfig = {
   whitelist: ['token'],
 };
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['filter'],
-};
+export const store = configureStore({
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    contacts: contactsReducer,
+    filter: filterReducer,
+  },
+  middleware,
+  devTools: process.env.NODE_ENV === 'development',
+});
+
+export const persistor = persistStore(store);
+
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+//   blacklist: ['filter'],
+// };
 
 // Persisting token field from auth slice to localstorage
 
@@ -45,21 +55,6 @@ const persistConfig = {
 //   console.log('My middleware!', action);
 //   next(action);
 // };
-
-export const rootReducers = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer),
-  contacts: contactsReducer,
-  filter: filterReducer,
-});
-
-const persistedReducer = persistReducer(persistConfig, rootReducers);
-
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware,
-});
-
-export const persistor = persistStore(store);
 
 // export const store = configureStore({
 //   reducer: {

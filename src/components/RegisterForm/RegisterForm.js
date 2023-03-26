@@ -17,6 +17,16 @@ export const RegisterForm = () => {
     form.reset();
   };
 
+  //     dispatch(
+  //       register({
+  //         name: form.elements.name.value,
+  //         email: form.elements.email.value,
+  //         password: form.elements.password.value,
+  //       })
+  //     );
+  //     form.reset();
+  //   };
+
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
       <label>
