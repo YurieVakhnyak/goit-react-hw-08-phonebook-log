@@ -17,18 +17,16 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     const { name, email, password } = credentials;
-    console.log(name, email, password);
     credentials = {
-      name: 'Adrian Crosss',
-      email: 'across@mail.coms',
-      password: 'examplepwd12345s',
+      name: name,
+      email: email,
+      password: password,
     };
 
+    console.log(credentials);
     try {
       const res = await axios.post('/users/signup', credentials);
-      if (!res.data.token) {
-        console.log('trying');
-      }
+
       setAuthHeader(res.data.token);
 
       return res.data;
@@ -41,10 +39,10 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
-    // const userData = JSON.parse(credentials);
+    const { email, password } = credentials;
     credentials = {
-      email: 'across@mail.coms',
-      password: 'examplepwd12345s',
+      email: email,
+      password: password,
     };
     try {
       const res = await axios.post('/users/login', credentials);

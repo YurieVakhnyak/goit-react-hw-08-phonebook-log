@@ -1,7 +1,4 @@
-import {
-  configureStore,
-  // combineReducers,
-} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistReducer,
   persistStore,
@@ -42,25 +39,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-//   blacklist: ['filter'],
-// };
-
-// Persisting token field from auth slice to localstorage
-
-// const myMiddleware = store => next => action => {
-//   console.log('My middleware!', action);
-//   next(action);
-// };
-
-// export const store = configureStore({
-//   reducer: {
-//     auth: persistReducer(authPersistConfig, authReducer),
-//     tasks: tasksReducer,
-//   },
-//   middleware,
-//   devTools: process.env.NODE_ENV === 'development',
-// });
