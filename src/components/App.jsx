@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { useEffect, lazy } from 'react';
-// import { selectError, selectIsLoading } from 'redux/selectors';
 import { Layout } from './Layout';
 import { Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
@@ -28,20 +27,22 @@ export const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route
-          path="register"
+          path="/register"
           element={
-            <RestrictedRoute redirectTo="contacts" component={<Register />} />
+            <RestrictedRoute redirectTo="/contacts" component={<Register />} />
           }
         />
         <Route
-          path="login"
+          path="/login"
           element={
-            <RestrictedRoute redirectTo="contacts" component={<Login />} />
+            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
           }
         />
         <Route
-          path="contacts"
-          element={<PrivateRoute redirectTo="login" component={<Contacts />} />}
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<Contacts />} />
+          }
         />
       </Route>
     </Routes>
