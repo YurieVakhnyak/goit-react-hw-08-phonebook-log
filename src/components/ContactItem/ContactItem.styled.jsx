@@ -31,4 +31,7 @@ export const DeleteButton = styled(ContactButton)`
   ${props => css`
     height: 20px;
   `}
+  & hover {
+    color: white;
+  }
 `;

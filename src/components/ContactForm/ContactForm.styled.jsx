@@ -36,6 +36,7 @@ export const ContactButton = styled.button`
   &:hover {
     background-color: cadetblue;
     border-color: cadetblue;
+    color: white;
     cursor: pointer;
   }
 `;
