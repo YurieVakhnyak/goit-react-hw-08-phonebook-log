@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { logIn } from 'redux/auth/authOperation';
+
 import {
   ContactFormStyled,
   ContactInput,
@@ -8,6 +10,8 @@ import {
 } from 'components/ContactForm/ContactForm.styled';
 
 export const LoginForm = () => {
+  const [tries, setTries] = useState('isFirstTry');
+
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -19,20 +23,28 @@ export const LoginForm = () => {
         password: form.elements.password.value,
       })
     );
-    form.reset();
+    setTries('isNotFirstTry');
+    // form.reset();
   };
 
   return (
-    <ContactFormStyled onSubmit={handleSubmit} autoComplete="off">
-      <ContactLabel>
-        Email
-        <ContactInput type="email" name="email" />
-      </ContactLabel>
-      <ContactLabel>
-        Password
-        <ContactInput type="password" name="password" />
-      </ContactLabel>
-      <ContactButton type="submit">Log In</ContactButton>
-    </ContactFormStyled>
+    <div>
+      {tries === 'isNotFirstTry' && (
+        <p style={{ color: 'blue', textAlign: 'center', fontSize: '13px' }}>
+          Maybe wrong password? Try again
+        </p>
+      )}
+      <ContactFormStyled onSubmit={handleSubmit} autoComplete="off">
+        <ContactLabel>
+          Email
+          <ContactInput type="email" name="email" />
+        </ContactLabel>
+        <ContactLabel>
+          Password
+          <ContactInput type="password" name="password" />
+        </ContactLabel>
+        <ContactButton type="submit">Log In</ContactButton>
+      </ContactFormStyled>
+    </div>
   );
 };
