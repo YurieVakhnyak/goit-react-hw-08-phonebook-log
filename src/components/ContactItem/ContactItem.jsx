@@ -1,29 +1,102 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { MdPhone } from 'react-icons/md';
 import { DeleteButton } from 'components/ContactItem/ContactItem.styled';
-
+import {
+  ContactFormStyled,
+  ContactInput,
+  ContactLabel,
+  ContactButton,
+} from 'components/ContactForm/ContactForm.styled';
 import {
   ContactItemStyled,
   ContactName,
+  Modal,
+  Overlay,
+  ButtonBox,
+  EditButton,
 } from 'components/ContactItem/ContactItem.styled';
-import { deleteContact } from 'redux/operations';
+import { deleteContact, editContact } from 'redux/operations';
 
 export const ContactItem = ({ id, name, number }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [contactName, setContactName] = useState(name);
+  const [contactNumber, setContactNumber] = useState(number);
   const dispatch = useDispatch();
 
-  const onDeleteContact = evt => {
-    dispatch(deleteContact(evt.target.name));
+  const onDeleteContact = () => {
+    dispatch(deleteContact(id));
+  };
+
+  const onEditContact = () => {
+    setIsEditing(true);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const editName = form.elements.editName.value;
+    const editNumber = form.elements.editNumber.value;
+
+    const reqBody = {
+      id,
+      name: editName,
+      number: editNumber,
+    };
+
+    dispatch(editContact(reqBody));
+
+    setContactName(editName);
+    setContactNumber(editNumber);
+    setIsEditing(false);
+  };
+
+  const onCancelEdit = () => {
+    setIsEditing(false);
   };
 
   return (
     <ContactItemStyled key={id}>
       <MdPhone />
       <ContactName>
-        {name} : {number}
+        {contactName} : {contactNumber}
       </ContactName>
-      <DeleteButton type="button" name={id} onClick={onDeleteContact}>
+      <DeleteButton type="button" onClick={onEditContact}>
+        Edit
+      </DeleteButton>
+      <DeleteButton type="button" onClick={onDeleteContact}>
         Delete
       </DeleteButton>
+      {isEditing && (
+        <Overlay>
+          <Modal>
+            <ContactFormStyled onSubmit={handleSubmit} autoComplete="off">
+              <ContactLabel>
+                Edit name
+                <ContactInput
+                  type="text"
+                  name="editName"
+                  defaultValue={contactName}
+                />
+              </ContactLabel>
+              <ContactLabel>
+                Edit number
+                <ContactInput
+                  type="text"
+                  name="editNumber"
+                  defaultValue={contactNumber}
+                />
+              </ContactLabel>
+              <ButtonBox>
+                <EditButton type="submit">Save</EditButton>
+                <EditButton type="button" onClick={onCancelEdit}>
+                  Cancel
+                </EditButton>
+              </ButtonBox>
+            </ContactFormStyled>
+          </Modal>
+        </Overlay>
+      )}
     </ContactItemStyled>
   );
 };

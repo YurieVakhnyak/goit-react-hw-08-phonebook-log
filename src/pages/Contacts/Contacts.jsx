@@ -6,6 +6,7 @@ import { selectIsLoading } from 'redux/selectors';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 import { ContactForm } from 'components/ContactForm/ContactForm';
+// import { Modal } from 'components/ContactEditor/ContactEditor';
 import {
   Phonebook,
   ContactTitle,
@@ -32,6 +33,7 @@ export default function Contacts() {
       <ContactTitle>Contacts</ContactTitle>
       <Filter />
       <ContactList />
+      {/* <Modal></Modal> */}
     </Phonebook>
   );
 }

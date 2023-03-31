@@ -9,13 +9,10 @@ export const ContactList = () => {
 
   return (
     <ContacListStyled>
-      {visibleContacts ? (
+      {visibleContacts &&
         visibleContacts.map(({ id, name, number }) => (
           <ContactItem key={id} id={id} name={name} number={number} />
-        ))
-      ) : (
-        <p>nich ne vudno!</p>
-      )}
+        ))}
     </ContacListStyled>
   );
 };
