@@ -6,7 +6,6 @@ import {
   ContactFormStyled,
   ContactInput,
   ContactLabel,
-  ContactButton,
 } from 'components/ContactForm/ContactForm.styled';
 import {
   ContactItemStyled,

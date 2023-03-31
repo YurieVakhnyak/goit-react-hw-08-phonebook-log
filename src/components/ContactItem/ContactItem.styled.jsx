@@ -1,9 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import {
-  ContactButton,
-  ContactFormStyled,
-} from 'components/ContactForm/ContactForm.styled';
+import { ContactButton } from 'components/ContactForm/ContactForm.styled';
 
 export const ContactItemStyled = styled.li`
   display: flex;
