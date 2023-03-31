@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { MdPhone } from 'react-icons/md';
+import { FiEdit2 } from 'react-icons/fi';
 import { DeleteButton } from 'components/ContactItem/ContactItem.styled';
 import {
   ContactFormStyled,
@@ -11,6 +12,7 @@ import {
   ContactItemStyled,
   ContactName,
   Modal,
+  OpenEdititorButton,
   Overlay,
   ButtonBox,
   EditButton,
@@ -18,6 +20,7 @@ import {
 import { deleteContact, editContact } from 'redux/operations';
 
 export const ContactItem = ({ id, name, number }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [contactName, setContactName] = useState(name);
   const [contactNumber, setContactNumber] = useState(number);
@@ -60,9 +63,15 @@ export const ContactItem = ({ id, name, number }) => {
       <ContactName>
         {contactName} : {contactNumber}
       </ContactName>
-      <DeleteButton type="button" onClick={onEditContact}>
-        Edit
-      </DeleteButton>
+
+      <OpenEdititorButton
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        type="button"
+        onClick={onEditContact}
+      >
+        <FiEdit2 color={isHovered ? 'blue' : 'cadetblue'} />
+      </OpenEdititorButton>
       <DeleteButton type="button" onClick={onDeleteContact}>
         Delete
       </DeleteButton>

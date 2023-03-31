@@ -24,13 +24,12 @@ export const LoginForm = () => {
       })
     );
     setTries('isNotFirstTry');
-    // form.reset();
   };
 
   return (
     <div>
       {tries === 'isNotFirstTry' && (
-        <p style={{ color: 'blue', textAlign: 'center', fontSize: '13px' }}>
+        <p style={{ color: 'green', textAlign: 'center', fontSize: '13px' }}>
           Maybe wrong password? Try again
         </p>
       )}

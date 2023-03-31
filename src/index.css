@@ -27,4 +27,5 @@ a {
 
 a:hover {
   color: cadetblue;
+  border-color: transparent;
 }

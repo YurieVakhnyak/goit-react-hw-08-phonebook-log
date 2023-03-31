@@ -18,11 +18,6 @@ export const ContactItemStyled = styled.li`
   }
 `;
 
-export const ContactIcon = styled.svg`
-  color: cadetblue;
-  margin-right: 10px;
-`;
-
 export const ContactName = styled.p`
   margin-right: auto;
 `;
@@ -31,6 +26,16 @@ export const DeleteButton = styled(ContactButton)`
   ${props => css`
     height: 20px;
   `}
+`;
+
+export const OpenEdititorButton = styled.button`
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 20px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: transparent;
+  background-color: transparent;
 `;
 
 export const ButtonBox = styled.div`

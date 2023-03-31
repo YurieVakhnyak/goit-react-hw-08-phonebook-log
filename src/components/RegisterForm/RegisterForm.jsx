@@ -22,13 +22,12 @@ export const RegisterForm = () => {
       })
     );
     setTries('isNotFirstTry');
-    // form.reset();
   };
 
   return (
     <div>
       {tries === 'isNotFirstTry' && (
-        <p style={{ color: 'green', textAlign: 'center', fontSize: '14px' }}>
+        <p style={{ color: 'blue', textAlign: 'center', fontSize: '14px' }}>
           Please, try another name
         </p>
       )}
